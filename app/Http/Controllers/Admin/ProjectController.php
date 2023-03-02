@@ -130,6 +130,8 @@ class ProjectController extends Controller
         $newProject->save();
         if (isset($data['technologies'])) {
             $newProject->technologies()->sync($data['technologies']);
+        }else {
+            $newProject->technologies()->sync([]);
         };
 
         return redirect()->route('admin.projects.show', $newProject->id)->with('message', "$newProject->title has been modified")->with('alert-type', 'success');
