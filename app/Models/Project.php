@@ -13,11 +13,18 @@ class Project extends Model
         'title', 'slug', 'content', 'author', 'image', 'date', 'type_id'
     ];
 
-    public function type() {
+    public function type()
+    {
         return $this->belongsTo(Type::class);
     }
 
-    public function technologies() {
+    public function technologies()
+    {
         return $this->belongsToMany(Technology::class);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }
