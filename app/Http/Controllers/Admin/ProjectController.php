@@ -132,8 +132,7 @@ class ProjectController extends Controller
         $data['author'] = Auth::user()->name;
         $data['slug'] = Str::slug($newProject['title']);
 
-        $newProject->fill($data);
-        $newProject->save();
+        $newProject->update($data);
         if (isset($data['technologies'])) {
             $newProject->technologies()->sync($data['technologies']);
         }else {

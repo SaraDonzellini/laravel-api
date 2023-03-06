@@ -9,14 +9,15 @@ use Illuminate\Http\Request;
 class TechnologyController extends Controller
 {
 
-    public function GetValidated($request){
+    public function GetValidated($request)
+    {
         return $request->validate([
             'name' => 'required|string|min:2|max:50',
         ]);
     }
 
 
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -54,7 +55,7 @@ class TechnologyController extends Controller
 
         $newTech->fill($data);
         $newTech->save();
-        
+
 
         return redirect()->route('admin.technologies.show', $newTech->id)->with('message', "$newTech->name has been created")->with('alert-type', 'info');
     }
@@ -78,6 +79,7 @@ class TechnologyController extends Controller
      */
     public function edit(Technology $technology)
     {
+
         return view('admin.technologies.edit', compact('technology'));
     }
 
@@ -93,11 +95,11 @@ class TechnologyController extends Controller
         $this->GetValidated($request);
 
         $data = $request->all();
-        $tech = Technology::findOrFail($technology);
-        $tech->update($data);
+        // $tech = Technology::findOrFail($technology);
+        $technology->update($data);
 
 
-        return redirect()->route('admin.technologies.show', $tech->id)->with('message', "$tech->name has been modified")->with('alert-type', 'success');
+        return redirect()->route('admin.technologies.show', $technology->id)->with('message', "$technology->name has been modified")->with('alert-type', 'success');
     }
 
     /**
@@ -109,7 +111,7 @@ class TechnologyController extends Controller
     public function destroy(Technology $technology)
     {
         $technology->delete();
-        
+
         return redirect()->route('admin.technologies.index', compact('technology'))->with('message', "$technology->name has been deleted")->with('alert-type', 'danger');
     }
 }

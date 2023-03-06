@@ -41,7 +41,7 @@
                         <td>
                             <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-primary">Show</a>
                             <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-success">Edit</a>
-                            <form class="d-inline form-deleter" action="{{ route('admin.projects.destroy', $project->id) }}"
+                            <form class="d-inline form-deleter" action="{{ route('admin.projects.destroy', $project->slug) }}"
                                 method="POST" data-element-name="{{ $project->title }}">
                                 @csrf
                                 @method('DELETE')

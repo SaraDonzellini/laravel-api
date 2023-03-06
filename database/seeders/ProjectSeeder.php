@@ -21,7 +21,7 @@ class ProjectSeeder extends Seeder
     {
         
         
-        for ($i = 0; $i < 800; $i++) {
+        for ($i = 0; $i < 400; $i++) {
             $newProject = new Project();
             $newProject->type_id = Type::inRandomOrder()->first()->id;
             $newProject->title = $faker->unique()->realText(20);

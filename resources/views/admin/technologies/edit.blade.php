@@ -21,8 +21,9 @@
                 </h1>
             </div>
             <div class="col-12">
-                <form action="{{ route('admin.technologies.update'), $technology }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.technologies.update', $technology) }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="name" name="name"
