@@ -8,7 +8,12 @@
                     <div class="card-header">
                         {{ $project->author }}
                     </div>
-                    <img src="{{ asset('storage/' . $project->image) }}" class="card-img-top img-fluid" alt="{{ $project->title }}">
+                    @if (str_starts_with($project->image, 'http'))
+                        <img src="{{ $project->image }}"
+                    @else
+                        <img src="{{ asset('storage/' . $project->image ) }}"
+                    @endif
+                        alt="{{ $project->title }}" class="card-img-top img-fluid">
 
                     <div class="card-body">
                         <h5 class="card-title">{{ $project->title }}</h5>

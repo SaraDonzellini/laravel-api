@@ -116,6 +116,7 @@ class ProjectController extends Controller
     {
         $this->GetValidated($request);
         
+        $data = $request->all();
         if ($request->hasFile('image')) {
             
             if (!str_starts_with($project->image, 'http')){
@@ -125,21 +126,19 @@ class ProjectController extends Controller
             $data['image'] = Storage::put('uploads', $data['image']);
         }
 
-        
-        $data = $request->all();
-        $newProject = new Project();
+    
 
         $data['author'] = Auth::user()->name;
-        $data['slug'] = Str::slug($newProject['title']);
+        $data['slug'] = Str::slug($project['title']);
 
-        $newProject->update($data);
+        $project->update($data);
         if (isset($data['technologies'])) {
-            $newProject->technologies()->sync($data['technologies']);
+            $project->technologies()->sync($data['technologies']);
         }else {
-            $newProject->technologies()->sync([]);
+            $project->technologies()->sync([]);
         };
 
-        return redirect()->route('admin.projects.show', $newProject->id)->with('message', "$newProject->title has been modified")->with('alert-type', 'success');
+        return redirect()->route('admin.projects.show', $project->slug)->with('message', "$project->title has been modified")->with('alert-type', 'success');
     }
 
     /**
