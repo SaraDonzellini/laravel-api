@@ -11,7 +11,7 @@
     </div>
     <div class="row">
     @foreach ($projects as $project )
-        <div class="col-5">
+        <div class="col-6">
             <div class="card mb-5 d-flex">
                 <div class="card-header">
                     {{ $project->author }}
