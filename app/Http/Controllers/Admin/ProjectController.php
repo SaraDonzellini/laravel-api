@@ -35,7 +35,13 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::paginate(10);
+        if (Auth::user()->roles()->pluck('id')->contains(1) || Auth::user()->roles()->pluck('id')->contains(2) ) {
+            $projects = Project::paginate(10);
+            
+        } else {
+            $projects = Project::where('author', Auth::user()->name)->paginate(10);
+        }
+        
         return view('admin.projects.index', compact('projects'), 
         // ['projects' => DB::table('projects')->paginate(15)]
     );
